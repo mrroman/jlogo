@@ -2,14 +2,17 @@
 
 package jlogo;
 
+import jlogo.command.*;
+import jlogo.function.*;
+
 import javax.swing.*;
 import java.util.*;
 import java.io.*;
 
 public class LogoInterpreter extends Thread {
 	LogoScreen logoScreen;
-	HashMap cmdMap;
-	HashMap funcMap;
+	Map<String, Command> cmdMap;
+	Map<String, Function> funcMap;
 	HashMap varMap;
 	Random rnd;
 	Stack cmdStack;
@@ -34,8 +37,8 @@ public class LogoInterpreter extends Thread {
 	}
 	
 	public void installCommands() {
-		cmdMap=new HashMap(); // mapa procedur
-		funcMap=new HashMap(); // mapa funkcji
+		cmdMap=new HashMap<String, Command>(); // mapa procedur
+		funcMap=new HashMap<String, Function>(); // mapa funkcji
 		varMap=new HashMap(); // mapa zmiennych
 		rnd=new Random();
 		cmdStack=new Stack();
@@ -625,26 +628,4 @@ public class LogoInterpreter extends Thread {
 		varMap.remove((Object)name);
 	}
 
-	public static void main(String args[]) throws InterpreterError,NoSuchElementException {
-		LogoScreen lg = new LogoScreen();
-		LogoInterpreter li = new LogoInterpreter(lg);
-	
-		String expr;
-
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	   
-		try {
-			for(;;) {
-				System.out.print("Wpisz wyra¿enie: ");
-      				expr = br.readLine();
-      				if(expr.equals("")) break;
-      				try {
-					System.out.println(Tokenizer.tokenize(expr));
-        				li.interpret(Tokenizer.tokenize(expr));
-      				} catch (InterpreterError exc) {
-			        	System.out.println(exc);
-      				}
-			}
-		} catch(IOException e) {}
-	}
 }

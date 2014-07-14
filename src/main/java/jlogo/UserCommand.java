@@ -3,6 +3,9 @@
 
 package jlogo;
 
+import jlogo.command.Command;
+import jlogo.function.Function;
+
 import java.util.*;
 
 public class UserCommand implements Command,Function
