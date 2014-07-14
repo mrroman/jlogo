@@ -1,0 +1,11 @@
+load "kolo
+
+to olimp :y
+cs
+make "x :y
+repeat 8 [ tell :x lt 45*:x pu fd 100 pd kolo pu bk 100 pd wait 0.1 make "x :x+1 ]
+end
+
+make "y 0
+repeat 8 [ olimp :y pr :y make "y :y +1 ]
+

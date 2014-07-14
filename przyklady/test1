@@ -1,0 +1,3 @@
+cs make "x 0 
+rt 90
+repeat 128 [ setc :x :x :x fd 100 rt 90 fd 1 rt 90 make "x :x+1 setc :x :x :x fd 100 lt 90 fd 1 lt 90 make "x :x+1 ]

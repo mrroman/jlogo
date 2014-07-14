@@ -1,0 +1,5 @@
+cs
+
+make "y 0
+repeat 8 [ home make "x 0 tell :y repeat 180 [ setpos :x 50*sin(:x*2)+:y*4 make "x :x+1 ] make "y :y+1]
+

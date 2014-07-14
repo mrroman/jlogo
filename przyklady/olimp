@@ -1,0 +1,3 @@
+load "kolo
+cs
+repeat 5 [ lt 72 pu fd 50 pd kolo pu bk 50 pd ]

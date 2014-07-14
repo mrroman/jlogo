@@ -1,0 +1,285 @@
+Opis u¿ycia programu JLogo - prostego interpretera jêzyka LOGO.
+---------------------------------------------------------------
+
+1. Wstêp.
+---------
+
+JLogo jest prostym interpreter LOGO opartym o dialekt Atari LOGO. Jest to niepe³ny dialekt ale wystarczaj±cy do pisania ma³ych procedurek w LOGO. JLogo jest ³atwo rozszerzalne. Aby dodaæ kolejne polecenia wystarcz± wpisy w tablicy procedur lub funkcji i nowe klasy. Oczywi¶cie dostêpne s± te¿ polecenia TO, END i OP do tworzenia w³asnych procedur zapisanych w LOGO.
+
+2. Typy danych w JLogo.
+-----------------------
+
+Dostêpne s± trzy typy danych:
+
+  - typ liczbowy (liczby zmiennoprzecinkowe - korzystam z typu Double z Javy),
+  - typ ³añcuchowy (³añcuch znaków - korzystam z typu String),
+  - typ listowy (listy wyra¿eñ).
+
+Dane typu liczbowego sk³adaj± siê z cyfr i . oznaczaj±cej czê¶æ zmiennoprzecinkow±.
+Dane typu ³añcuchowego zaczynaj± siê od znaku " i sk³adaj± siê z liter, cyfr i znaków nie bêd±cych operatorami.
+Dane typu listowego otoczone s± znakiem kwadratowego nawiasu. Elementy listy przedzielone s± przez znaki bia³e (spacje, tabulatory, itd).
+
+3. Operatory.
+-------------
+
+  a. Operatory arytmetyczne. S± to +(dodawanie),-(odejmowanie),*(mno¿enie),/(dzielenie). Dzia³aj± one tylko na typie liczbowym.
+  b. Operatory porównañ. S± to:
+    = równo¶æ
+    > wiêkszy
+    < mniejszy
+    >= wiêkszy równy
+    <= mniejszy równy
+
+    Operatory dzia³aj± na wyra¿eniach liczbowych. Dodatkowo operator = umo¿liwia porównywanie ³añcuchów znaków i list.
+
+4. ¦rodowisko interpretera.
+---------------------------
+
+	---------------------------------------------
+	|                                           |
+	|                                           |
+	|                                           |
+	|                                           |
+	|                                           |
+	|                                           |  -- ekran graficzny
+	|                                           |
+	|                                           |
+	|                                           |
+	|                                           |
+	|                                           |
+	---------------------------------------------
+	|                                         |V| -- linia poleceñ
+	---------------------------------------------
+	|                                           |
+	|                                           | -- wyj¶cie tekstowe
+	|                                           |
+	---------------------------------------------
+
+
+  a. na ekranie graficznym wykonywane s± operacje rysowania.
+  b. linia poleceñ umo¿liwia wydawanie poleceñ natychmiastowych.
+  c. wyj¶cie tekstowe s³u¿y do wyprowadzania danych tekstowych.
+
+5. Tworzenie poleceñ korzystaj±c z komendy TO.
+----------------------------------------------
+
+Aby utworzyæ nowe polecenie(funkcjê) nale¿y w linii poleceñ (lub w pliku z procedurami) napisaæ:
+
+to nazwa_polecenia :x :y
+
+- nazwa_polecenia mo¿e byæ tekstem zaczynaj±cym siê od litery, z dowoln± ilo¶ci± cyfr.
+- :x :y - to przyk³ad, tak naprawdê mo¿e byæ dowolna ilo¶æ zmiennych. Zmienne te pokrywaj± zmienne globalne dostêpne w interpreterze. Mo¿e te¿ wogólenie nie byæ zmiennych.
+
+Tre¶æ polecenia koñczy end. Wewn±trz mo¿e wyst±piæ polecenie op które umo¿liwia zwracanie danych. Wtedy polecenie staje siê funkcj±.
+
+W³asne polecenie i funkcje wywo³uje siê dok³adnie tak samo jak wbudowane.
+
+6. Zapis i odczyt utworzonych poleceñ.
+--------------------------------------
+
+Zapisu twoich poleceñ dokonujesz przez komendê:
+	SAVE "nazwa_pliku
+
+	nazwa_pliku jest ci±giem znaków z cyframi
+
+Odczyt poleceñ nastêpuje przez wydanie komendy:
+
+	LOAD "nazwa_pliku
+
+LOAD interpretuje ca³y plik, tak jakby zosta³y wydane kolejno polecenia. Umo¿liwia to automatyczne wykonywanie skryptu.
+
+7. Wbudowane polecenia:
+-----------------------
+	
+	a) operacje arytmetyczne:
+
+		COS kat - oblicza cosinus kata. Kat podany jest w stopniach.
+
+		INT liczba - zwraca czê¶æ ca³kowit± liczby
+
+		PRODUCT liczba1 liczba2 - oblicza iloczy liczb
+
+		RANDOM zakres - zwraca liczbê losow± z podanego zakresu (0..zakres-1)
+
+		REMAINDER dzielna dzielnik - oblicza resztê z dzielenia.
+
+		ROUND liczba - zaokr±gla liczbê do postaci ca³kowitej.
+
+		SIN kat - oblicza sinus kata.
+
+		SQRT liczba - oblicza pierwiastek kwadratowy liczby.
+
+		SUM liczba1 liczba2 - oblicza sume liczb.
+
+	b) operacje logiczne:
+
+		AND war1 war2 - oblicza iloczyn logiczny war1 i war2.
+
+		OR war1 war2 - oblicza sumê logiczn± war1 i war2.
+
+		NOT war1 - oblicza negacjê war1.
+
+	c) zmienne:
+
+		MAKE "nazwa wartosc - nadanie zmiennej nazwa warto¶ci warto¶æ.
+
+		NAMEP "nazwa - zwraca true je¶li nazwa jest zmienn±.
+
+		THING "nazwa - zwraca warto¶æ zmiennej nazwa. £atwiej korzystaæ z postaci :nazwa.
+
+	d) operacje na listach:
+
+		BF obiekt - obiektem jest lista lub s³owo. Funkcja zwraca obiekt bez pierwszego elementu (znaku).
+
+		BL obiekt - obiektem jest lista lub s³owo. Funkcja zwraca obiekt bez ostatniego elementu (znaku).
+
+		COUNT obiekt - zwraca ilo¶æ elementów obiektu.
+
+		EMPTYP obiekt - zwraca true je¶li obiekt jest pusty (pusta lista, puste s³owo).
+
+		EQUALP obiekt1 obiekt2 - odpowiednik operatora =.
+
+		FIRST obiekt - zwraca pierwszy element obiektu.
+
+		FPUT obiekt lista - zwraca listê z dodanym na pocz±tku listy obiektem.
+
+		GETL lista n - zwraca n-ty obiekt listy (n liczy siê od 0). - rozszerzenie w stosunku do dialektu.
+
+		LAST obiekt - zwraca pierwszy element obiektu.
+
+		LIST obiekt1 obiekt2 - tworzy listê z obiektów. Je¶li polecenie jest otoczone nawiasami to mo¿na podaæ wiêcej obiektów.
+
+		LISTP obiekt - zwraca true je¶li to jest lista.
+
+		LPUT obiekt lista - zwraca listê z dodanym na koñcu listy obiektem.
+
+		MEMBERP obiekt lista - sprawdza czy obiekt jest elementem listy.
+
+		SE obiekt1 obiekt2 - tworzy listê jak w poleceniu LIST ale wszystkie elementy list wewnêtrznych s± ³±czone w wspóln± listê. Polecenie obs³uguje nawiasy.
+
+	e) operacje na s³owach
+
+		ASCII znak - zwraca kod znaku.
+
+		WORD slowo1 slowo2 - ³±czy s³owa w jedno.
+
+		WORDP obiekt - zwraca true je¶li obiekt jest s³owem (typ ³añcuchowy).
+
+		NUMBERP obiekt - zwraca true je¶li obiekt jest liczb±.
+
+	f) operacje graficzne:
+
+		ASK lista listainstrukcji - nakazuje ¿ó³wiom (z listy) wykonanie listy instrukcji.
+
+		BK n - wykonuje n kroków do ty³u.
+
+		CLEAN - czy¶ci ekran aktywnego ¿ó³wia, bez poszurania go.
+
+		CS - CLEAN ale dodatkowo przemieszcza ¿ó³wia na ¶rodek.
+
+		EACH listainstrukcji - ka¿dy ¿ó³w wykonuje listy instrukcji.
+
+		FD n - wykonuje n kroków naprzód.
+
+		HOME - ustawia ¿ó³wia na ¶rodek ekranu.
+
+		LT kat - obraca ¿ó³wia w lewo o kat stopni.
+
+		PD - opuszcza pióro
+
+		PU - podnosi pióro
+
+		RT kat - obraca ¿ó³wia w prawo o kat stopni
+
+		SETBG r g b - ustawia kolor t³a na r g b
+
+		SETC r g b - ustawia kolor pióra ¿ó³wia
+
+		SETH kat - ustawia ¿ó³wia na kat stopni w stosunku do pionu
+
+		SETPOS x y - ustawia po³o¿enie ¿ó³wia na x,y. Standardowo po³o¿enie (0,0) wskazuje ¶rodek ekranu graficznego. Przy zmianie po³o¿enia ¿ó³w rysuje liniê kiedy pióro jest opuszczone.
+
+		SETX x - patrz SETPOS.
+
+		SETY y - jak wy¿ek.
+		
+		TELL n - wybierz ¿ó³wia n jako aktywnego.
+
+	g) parametry grafiki
+
+		BG - zwraca listê z parametrami koloru t³a (r,g,b).
+
+		COLOR - zwraca listê z parametrami koloru pióra ¿ó³wia (r,g,b).
+
+		HEADING - zwraca kierunek ¿ó³wia w stosunku do pionu.
+
+		POS - zwraca listê z pozycjami ¿ó³wia.
+
+		WHO - zwraca numer aktywnego ¿ó³wia.
+
+		XCOR - zwraca pozycjê x ¿ó³wia.
+		
+		YCOR - zwraca pozycjê y ¿ó³wia.
+
+	h) dialog z u¿ytkownikiem
+
+		CT - skasuj wyj¶cie tekstowe.
+
+		PR obiekt - wypisz obiekt na wyj¶cie tekstowe. Je¶li polecenie obejmiemu nawiasami okr±g³ymi, mo¿na wypisaæ wiêcej ni¿ jeden obiekt.
+
+	i) dzia³ania na zbiorach
+
+		CATALOG - wy¶wietl zawarto¶æ katalogu.
+
+		LOAD "nazwa - wczytaj zbiór i zinterpretuj go.
+
+		SAVE "nazwa - zapisz wszystkie zadeklarowane funkcje i procedury.
+
+	j) instrukcje warunkowe i steruj±ce.
+
+		IF war listainstrukcji1 listainstrukcji2 - je¶li war jest true wykonuje listê instrukcji 1. W przeciwnym wypadku, je¶li dopiszemy listê instrukcji 2, wykona j±.
+
+		OP obiekt - zwraca obiekt (przy wykonywaniu funkcji).
+
+		REPEAT n listainstrukcji - wykonuje n razy listê instrukcji.
+
+		RUN listainstrukcji - wykonuje listê instrukcji.
+
+		STOP - zatrzymuje interpreter.
+
+		WAIT czas - zatrzymuje program na czas sekund.
+
+	k) redagowanie poleceñ
+
+		TO nazwa parametry - rozpoczyna tworzenie polecenia
+
+		END - koñczy tworzenie polecenia
+
+		ERALL - kasuje wszystkie polecenia i zmienne.
+
+		ER listanazw - kasuje polecenia z listy.
+
+		ERPS - kasuje wszystkie polecenia.
+		
+		POTS - wy¶wietla wszystkie zadeklarowane polecenia.
+
+		RECYCLE - zwalnia pamiêæ. (System.gc())
+
+	l) redagowanie zmiennych.
+
+		ERN listanazw - kasuje zmienne z listy.
+
+		PONS - wypisuje wszystkie zmienne wraz z warto¶ciami.
+
+8. Komentarze:
+--------------
+
+Je¶li w linii znajduje siê znak '%' to dalsza czê¶æ po znaku nie bêdzie interpretowana.
+
+9. Pliki.
+---------
+
+W archiwum s± pliku ¼ród³owe (katalog src), plik jlogo.jar ze skompilowanym programem (katalog dist) i pliki przyk³adowe (katalog przyklady). Aby je uruchomiæ nale¿y uruchomiæ plik jar w katalogu z przyk³adami i wydaæ polecenie load "nazwapliku. 
+Aby skompilowaæ program potrzebny jest J2SDK 1.4.x oraz program ant (http://ant.apache.org).
+
+

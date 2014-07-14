@@ -1,0 +1,6 @@
+load "kolo
+tell 0 pu setpos -50 50 pd
+tell 1 pu setpos 50 50 pd
+tell 2 pu setpos 50 -50 pd
+tell 3 pu setpos -50 -50 pd
+each [ kolo ]

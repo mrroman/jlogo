@@ -1,0 +1,4 @@
+to kolo
+	repeat 36 [ lt 10 fd 10 ] % kreslimy kolo
+end
+

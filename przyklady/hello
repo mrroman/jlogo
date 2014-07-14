@@ -1,0 +1,12 @@
+to suma :x :y 
+op :x+:y 
+end
+
+to hello10 
+repeat 10.0 [ hello ] 
+end
+
+to hello 
+pr [ hello world ] 
+end
+
